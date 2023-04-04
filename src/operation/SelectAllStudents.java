@@ -8,28 +8,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class selectAllStudents {
-    private static jdbcImplement jdbc;
+public class SelectAllStudents {
     public static void selectAllStudent(){
+        jdbcImplement jdbc= new jdbcImplement();
         try ( Connection connection = jdbc.dataSource().getConnection()){
-            String selectsql = "SELECT * FROM student";
-            connection.prepareStatement(selectsql);
-            PreparedStatement preparedStatement = connection.prepareStatement(selectsql);
+            String selectStudent = "SELECT * FROM student";
+            connection.prepareStatement(selectStudent);
+            PreparedStatement preparedStatement = connection.prepareStatement(selectStudent);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Student> students = new ArrayList<>();
-            System.out.println("======================== Students Information =======================");
-            System.out.println("");
-            System.out.println("\tID\t\tName\t\t\t\t\tGender\t\t\tClassname\t\t\tScore");
-            System.out.println("---------------------------------------------------------------------");
+            System.out.println();
+            System.out.println("\tID\t\tName\t\t\tGender\t\t\tClassname\t\t\tScore");
+            System.out.println("-----------------------------------------------------------------------------------");
             while (resultSet.next()){
-                Integer id = resultSet.getInt("id");
+                int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String gender = resultSet.getString("gender");
                 String classname = resultSet.getString("classname");
                 Float score = resultSet.getFloat( "score");
                 students.add(new Student(name,gender,classname,score));
-                System.out.println("\t"+id+"\t\t"+name+"\t\t\t\t\t"+gender+"\t\t\t"+classname+"\t\t\t\t\t"+score);
+                System.out.println("\t"+id+"\t\t"+name+"\t\t\t"+gender+"\t\t\t"+classname+"\t\t\t\t\t"+score);
             }
+            System.out.println("-----------------------------------------------------------------------------------");
         }catch (SQLException exception){
             System.out.printf(exception.getMessage());;
         }

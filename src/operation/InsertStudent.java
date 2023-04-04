@@ -2,15 +2,14 @@ package operation;
 
 import database.jdbcImplement;
 import model.Student;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class InsertStudent {
-    private static jdbcImplement jdbc;
-    private static void insertStudent(Student student){
+    public static void insertStudent(Student student){
+        jdbcImplement jdbc = new jdbcImplement();
         try (Connection connection = jdbc.dataSource().getConnection()){
             String insertSql =  "INSERT INTO student (name,gender,classname,score) VALUES (?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(insertSql);

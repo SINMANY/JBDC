@@ -1,6 +1,4 @@
 package model;
-
-
 public class Student {
     private Integer id;
     private String name;
@@ -21,13 +19,20 @@ public class Student {
     public Student(String name, String gender, String classname, Float score) {
     }
 
-
-    public String getName() {
-        return name;
+    public Integer getId() {
+        return id;
     }
 
-    public void setName(String studentname) {
-        this.name = studentname;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getGender() {
@@ -63,6 +68,7 @@ public class Student {
                 ", classname='" + classname + '\'' +
                 ", score=" + score +
                 '}';
-    }}
+    }
+}
 
 

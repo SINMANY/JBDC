@@ -2,20 +2,21 @@ package operation;
 
 import database.jdbcImplement;
 import model.Student;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SelectStudentByName {
-    public static void SelectRecordByName(String name) throws SQLException {
+public class SelectStudentById {
+    public static void selectStudentById(Integer id) throws SQLException {
         jdbcImplement jdbc = new jdbcImplement();
         try (Connection connection = jdbc.dataSource().getConnection()){
-            String selectStudentById = "SELECT * FROM student WHERE name = ? ";
-            PreparedStatement statement = connection.prepareStatement(selectStudentById);
-            statement.setString(1,name);
-            statement.executeQuery();
-            ResultSet resultSet = statement.executeQuery();
+            String selectStudentById = "SELECT * FROM student" + " WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(selectStudentById);
+                    preparedStatement.setInt(1,id);
+                    preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             Student student = new Student();
             System.out.println("================================ Students Information =============================");
             System.out.println("");
@@ -32,4 +33,5 @@ public class SelectStudentByName {
             System.out.println("-----------------------------------------------------------------------------------");
         }
     }
+
 }
